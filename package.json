@@ -22,7 +22,8 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "turbo dev",
+    "dev": "turbo -F @hono-postmark/infra -F @hono-postmark/db dev db:studio",
+    "deploy": "turbo -F @hono-postmark/infra deploy",
     "build": "turbo build",
     "check-types": "turbo check-types",
     "dev:native": "turbo -F native dev",
@@ -32,6 +33,7 @@
     "db:studio": "turbo -F @hono-postmark/db db:studio",
     "db:generate": "turbo -F @hono-postmark/db db:generate",
     "db:migrate": "turbo -F @hono-postmark/db db:migrate",
+    "open-auth-docs": "open-cli http://localhost:3000/api/auth/reference",
     "check": "oxlint && oxfmt --write"
   },
   "dependencies": {

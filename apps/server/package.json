@@ -14,7 +14,6 @@
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "hono": "^4.8.2",
-    "postmark": "^4.0.5",
     "zod": "catalog:"
   },
   "devDependencies": {
