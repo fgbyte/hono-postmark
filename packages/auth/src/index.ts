@@ -15,15 +15,38 @@ export const auth = betterAuth({
   trustedOrigins: [env.CORS_ORIGIN],
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: true, // Require email verification before login
   },
   plugins: [openAPI()], //Activate OpenAPI DOCS 👈
   emailVerification: {
-    sendVerificationEmail: async ({ user, url, token }, request) => {
-      void sendEmail({
-        to: user.email,
-        subject: "Verify your email address",
-        text: `Click the link to verify your email: ${url}`,
+    sendOnSignUp: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      console.info("[auth] sending verification email", {
+        email: user.email,
+        userId: user.id,
       });
+
+      try {
+        await sendEmail({
+          to: user.email,
+          subject: "Verify your email address",
+          text: `Click the link to verify your email: ${url}`,
+          tag: "auth-verification",
+        });
+
+        console.info("[auth] verification email sent", {
+          email: user.email,
+          userId: user.id,
+        });
+      } catch (error) {
+        console.error("[auth] verification email failed", {
+          email: user.email,
+          userId: user.id,
+          error,
+        });
+
+        throw error;
+      }
     },
   },
   // uncomment cookieCache setting when ready to deploy to Cloudflare using *.workers.dev domains
@@ -33,8 +56,8 @@ export const auth = betterAuth({
   //     maxAge: 60,
   //   },
   // },
-  secret: env.BETTER_AUTH_SECRET,
-  baseURL: env.BETTER_AUTH_URL,
+  secret: env.BETTER_AUTH_SECRET, //sacadas de alchemy
+  baseURL: env.BETTER_AUTH_URL, //sacadas de alchemy
   advanced: {
     defaultCookieAttributes: {
       sameSite: "none",
