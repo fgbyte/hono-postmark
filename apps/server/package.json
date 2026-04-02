@@ -11,6 +11,7 @@
     "@hono-postmark/auth": "workspace:*",
     "@hono-postmark/db": "workspace:*",
     "@hono-postmark/env": "workspace:*",
+    "@hono-postmark/mail": "workspace:*",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "hono": "^4.8.2",

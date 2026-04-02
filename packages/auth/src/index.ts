@@ -3,6 +3,7 @@ import * as schema from "@hono-postmark/db/schema/auth";
 import { env } from "@hono-postmark/env/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { sendEmail } from "@hono-postmark/mail";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -14,6 +15,15 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  emailVerification: {
+    sendVerificationEmail: async ( { user, url, token }, request) => {
+          void sendEmail({
+            to: user.email,
+            subject: "Verify your email address",
+            text: `Click the link to verify your email: ${url}`,
+          });
+        },
+    }
   // uncomment cookieCache setting when ready to deploy to Cloudflare using *.workers.dev domains
   // session: {
   //   cookieCache: {
