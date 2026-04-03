@@ -1,6 +1,8 @@
 # hono-postmark
 
-This project was created with [Better Fullstack](https://github.com/Marve10s/Better-Fullstack), a modern TypeScript stack that combines React, TanStack Router, Hono, and more.
+This project is a modified version of [Better Fullstack](https://github.com/Marve10s/Better-Fullstack), a modern TypeScript stack that combines React, TanStack Router, Hono, and more.
+
+⚠️ **Note**: This is not the original template. It has been modified and optimized, so it may differ from the original Better Fullstack template.
 
 ## Features
 
@@ -16,6 +18,15 @@ This project was created with [Better Fullstack](https://github.com/Marve10s/Bet
 - **Turborepo** - Optimized monorepo build system
 - **Oxlint** - Oxlint + Oxfmt (linting & formatting)
 - **TanStack Query** - Async state management & data fetching
+
+## Environment Variables
+
+⚠️ **IMPORTANT**: This project requires environment variables to be configured. Without these files, the infrastructure will not start.
+
+- **`.env`**: Environment variables for production
+- **`.env.local`**: Environment variables for development
+
+Make sure to create these files before running the project. Check with your team to get the required variables.
 
 ## Getting Started
 
